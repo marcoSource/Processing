@@ -8,8 +8,9 @@ class Text {
    Default style
   */
   int defaultTextSize = 16;
-  color defaultTextColor = color(255);
-  color defaultShadowColor = color(100);
+  int alpha = 255;
+  color defaultTextColor;
+  color defaultShadowColor;
  
   /**
    @param str is the actually text to display
@@ -19,6 +20,8 @@ class Text {
     text = str;
     posX = x;
     posY = y;
+    defaultTextColor = color(0, 0, 0);
+    defaultShadowColor = color(179, 179, 179);
   }
   
   /**
@@ -27,6 +30,8 @@ class Text {
   Text(float x, float y){
     posX = x;
     posY = y;
+    defaultTextColor = color(0, 0, 0);
+    defaultShadowColor = color(179, 179, 179);
   }
   
   /**
@@ -39,7 +44,18 @@ class Text {
     textFont(font);
     posX = x;
     posY = y;
+    defaultTextColor = color(0, 0, 0);
+    defaultShadowColor = color(179, 179, 179);
   }
+  
+  /**
+  Empty Constructor to max personalizion;
+  */
+  Text(){
+    defaultTextColor = color(0, 0, 0);
+    defaultShadowColor = color(179, 179, 179);
+  }
+  
   
   /**
    To be called when the first constructor is in use
@@ -48,11 +64,11 @@ class Text {
   void show(boolean b){
     if(b){
       drawShadow(5, 5, defaultShadowColor);
-      fill(defaultTextColor);
+      fill(defaultTextColor, alpha);
       textSize(defaultTextSize);
       text(text, posX, posY);
     } else {
-      fill(defaultTextColor);
+      fill(defaultTextColor, alpha);
       textSize(defaultTextSize);
       text(text, posX, posY);
     }
@@ -66,11 +82,11 @@ class Text {
   void showAndUpdate(String t, boolean b){
     if(b){
       drawShadow(t, 5, 5, defaultShadowColor);
-      fill(defaultTextColor);
+      fill(defaultTextColor, alpha);
       textSize(defaultTextSize);
       text(t, posX, posY);
     } else {
-      fill(defaultTextColor);
+      fill(defaultTextColor, alpha);
       textSize(defaultTextSize);
       text(t, posX, posY);
     }
@@ -131,6 +147,19 @@ class Text {
   }
   
   /**
+    Make the blink effect on text
+  */
+  void blink(boolean b){
+    if(b){
+      if(alpha > 0){
+        alpha -= 5f;
+      } if(alpha == 0){
+        alpha = 255;
+      }
+    }
+  }
+  
+  /**
    Takes the width of the string and return a float
   */
   float getWidth(){
@@ -151,9 +180,11 @@ class Text {
   //Getters and setters to retrieve and change the default values
   float getX(){return posX;}
   float getY(){return posY;}
+  String getText(){return text;}
   void setX(float x){posX = x;}
   void setY(float y){posY = y;}
   void setTextColor(color c){defaultTextColor = c;}
   void setTextSize(int size){defaultTextSize = size;}
   void setShadowColor(color c){defaultShadowColor = c;}
+  void setText(String t){text = t;}
 }
