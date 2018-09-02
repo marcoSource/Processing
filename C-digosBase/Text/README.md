@@ -7,6 +7,6 @@ Text styling with Processing;
 * Draw Shadow
 * Coloring
 * Custom font
-* ...
+* Blinking Text
 
 For an example, [ClickHere](https://github.com/marcoOpensource/Processing/tree/master/Exemplos/TextExample) this will take you to another repo!
